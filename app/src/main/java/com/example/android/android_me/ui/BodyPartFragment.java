@@ -39,6 +39,12 @@ public class BodyPartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        //Load the saved state (the list of images and list index) if there is one
+        if (savedInstanceState != null){
+            mImageIds = savedInstanceState.getIntegerArrayList(IMAGE_ID_LIST);
+            mListIndex = savedInstanceState.getInt(LIST_INDEX);
+        }
+
         //inflate the Android-Me fragment layout
         View rootView = inflater.inflate(R.layout.fragment_body_part, container, false);
 
@@ -53,7 +59,7 @@ public class BodyPartFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     //increment position as long as the index remains <= the size of the image id's list
-                    if (mListIndex <= mImageIds.size()-1){
+                    if (mListIndex < mImageIds.size()-1){
                         mListIndex++;
                     }else{
                         //the end of list index is reached so return to beginning index
